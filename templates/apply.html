@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap -->
+	<link href="/statics/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/statics/js/jquery.form.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/statics/js/bootstrap.min.js"></script>
+    <title>Online报名入口</title>
+</head>
+<body>
+<div style ='margin:0 auto;width:0px;height:0px;overflow:hidden;'>
+<img src='/statics/images/logo.jpg' />
+</div >
+<herader class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<!--<h2>-->
+				<!--标题-->
+			<!--</h2>-->
+			<div class="">
+				<img src="/statics/images/title.jpg" class="img-responsive"/>
+			</div>
+
+		</div>
+	</div>
+</herader>
+<div class="container-fluid">
+
+    {% if description %}
+        <div class="" id="">{{description}}</div>
+    {% endif %}
+    <div id="output">
+        <form id="applyForm" method="post" action="." enctype="multipart/form-data">
+        <legend>报名表</legend>
+            <div class="form-group">
+            <div class="input-group">
+                <label class="input-group-addon">姓名</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            </div>
+            <div class="form-group">
+            <div class="input-group">
+                <label class="input-group-addon">电话</label>
+                <input type="text" class="form-control" id="phone" name="phone">
+            </div>
+                </div>
+            <div class="radio">
+                <label class="">性别</label>
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" class=""  value="boy" name="sex" checked="true" />男
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" class=""  value="girl" name="sex"  />女
+                    </label>
+                </div>
+            </div>
+            <div class="form-group ">
+                <div class="input-group">
+                <label class="input-group-addon">课程</label>
+                <select class="form-control" id="project" name="project" >
+                    {% if project %}
+                        {% for i in  project %}
+                            <option value="{{ i.id }}">{{ i.name }}--{{ i.price }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+                    </div>
+            </div>
+            <div class="form-group ">
+                <div class="input-group">
+                <label class="input-group-addon">头像</label>
+                    <input type="file" class="form-control" id="portrait" name="portrait"/>
+                </div>
+            </div>
+            <!--<div class="form-control">-->
+            <!--<input type="checkbox" /> 勾选同意</label>-->
+            <!--</div>-->
+            <div class="text-center">
+                <button type="submit" class="btn">报名</button>
+            </div>
+        </form>
+    </div>
+</div>
+<hr>
+<div class="footer-lower texe-center">
+	<span>© Copyright 2017 Legolas.Li All rights reserved.</span>
+</div>
+
+</body>
+</html>
+<script>
+$(document).ready(function() {
+    var options = {
+        target: '#output', // 从服务传过来的数据显示在这个div内部,也就是ajax局部刷新
+        //beforeSubmit: showRequest, // ajax提交之前的处理
+        success:  showResponse // 处理之后的处理
+     };
+
+    $('#applyForm').submit(function() {
+        $(this).ajaxSubmit(options);
+        return false;
+        //非常重要，如果是false，则表明是不跳转
+     });
+    function showResponse(responseText, statusText, xhr, $form) {
+        //console.log(xhr.responseText+"=="+$form.attr("method")+'status: ' + statusText + '\n\nresponseText: \n' + responseText);
+        console.log(data);
+        $("#output").html(data);
+        //xhr：说明你可以用ajax来自己再次发出请求
+        //$form：是那个form对象，是一个jquery对象
+        //statusText：状态，成功则为success
+        //responseText，服务器返回的是字符串（当然包括html，不包括json）
+    }
+});
+
+</script>

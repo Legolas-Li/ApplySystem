@@ -1,0 +1,19 @@
+<hr>
+<div class="container-fluid">
+
+	{% if msg %}
+		<div class="" id="">{{msg}}</div>
+	{% endif %}
+
+	{% if qr %}
+		<div class="" id="">
+			<label></label>
+			<img src="/{{ qr }}" class="img-responsive" />
+		</div>
+	{% endif %}
+	{% if status != "succeed" %}
+		<a href=".">重新报名</a>
+	{% else %}
+		<a href=".">Home</a>
+	{% endif %}
+</div>
