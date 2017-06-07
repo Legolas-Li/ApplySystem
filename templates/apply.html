@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Bootstrap -->
 	<link href="/statics/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/statics/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="/statics/js/jquery.form.js"></script>
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/statics/js/bootstrap.min.js"></script>
     <title>Online报名入口</title>
@@ -31,12 +33,27 @@
 </herader>
 <div class="container-fluid">
 
-    {% if description %}
-        <div class="" id="">{{description}}</div>
+    {% if project%}
+    <div class="col-md-8">
+        {% if project.title %}
+            <!--<div class="" id=""><i class="fa fa-header fa-fw"></i> {{project.title}}</div>-->
+            <div class="" id=""><legend> {{project.title}}  </legend></div>
+        {% endif %}
+        {% if project.end_at %}
+            <div class="" id=""><i class="fa fa-clock-o fa-fw"></i> {% if project.start_at %}{{project.start_at}}{% else %} Today {% endif %}--{{project.end_at}}</div>
+        {% endif %}
+        {% if project.address %}
+            <div class="" id=""><i class="fa fa-map-marker fa-fw"></i> {{project.address}}</div>
+        {% endif %}
+        {% if project.description %}
+            <div class="" id=""><i class="fa fa-pencil fa-fw"></i>{{project.description}}</div>
+        {% endif %}
+    </div>
+    <hr>
     {% endif %}
     <div id="output">
         <form id="applyForm" method="post" action="." enctype="multipart/form-data">
-        <legend>报名表</legend>
+        <!--<legend>报名表</legend>-->
             <div class="form-group">
             <div class="input-group">
                 <label class="input-group-addon">姓名</label>
@@ -65,9 +82,9 @@
             <div class="form-group ">
                 <div class="input-group">
                 <label class="input-group-addon">课程</label>
-                <select class="form-control" id="project" name="project" >
-                    {% if project %}
-                        {% for i in  project %}
+                <select class="form-control" id="classes" name="classes" >
+                    {% if classes %}
+                        {% for i in  classes %}
                             <option value="{{ i.id }}">{{ i.name }}--{{ i.price }}</option>
                         {% endfor %}
                     {% endif %}

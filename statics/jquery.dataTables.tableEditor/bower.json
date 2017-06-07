@@ -1,0 +1,49 @@
+{
+  "name": "TableEditor",
+  "version": "0.0.1",
+  "description": "TableEditor adds the ability to edit datatable data source.",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "datatables",
+    "editable",
+    "editor",
+    "tableEditor"
+  ],
+  "authors": [
+    "MoJie (https://github.com/mojied)"
+  ],
+  "license": [
+    "GPL-2.0",
+    "MIT"
+  ],
+  "main": [
+    "js/jquery.dataTables.tableEditor.js",
+    "css/jquery.dataTables.tableEditor.css",
+    "examples/app.js",
+    "examples/index.html"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7.0",
+    "datatables": ">=1.10.8",
+    "select2": "~4.0.0",
+    "bootstrap-datepicker": "~1.4.0",
+    "jquery-validation": "~1.14.0"
+  },
+  "devDependencies": {
+    "chai": "latest",
+    "chai-jquery": "latest",
+    "jquery-ui": "latest",
+    "mocha": "latest",
+    "sinonjs": "latest",
+    "underscore": "latest"
+  }
+}
