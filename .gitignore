@@ -1,0 +1,4 @@
+*.pyc
+
+AdminSystem/migrations/*
+FrontSystem/migrations/*
