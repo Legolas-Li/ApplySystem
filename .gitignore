@@ -1,4 +1,5 @@
 *.pyc
-
+statics/documents/portrait/*
+statics/documents/qr/*
 AdminSystem/migrations/*
 FrontSystem/migrations/*

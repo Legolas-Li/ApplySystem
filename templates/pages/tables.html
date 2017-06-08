@@ -17,7 +17,7 @@
                 <th>Phone</th>
                 <th>Sex</th>
                 <th>Class</th>
-                <th>port</th>
+                <th>Portrait</th>
                 <!--<th>Salary</th>-->
             </tr>
         </thead>
@@ -30,6 +30,20 @@
 {% block js %}
     $('#example').DataTable( {
         dom: 'Bfrtip',
+	aLengthMenu: [[10, 50, 100, -1], [10, 50, 100, "All"]],
+        "ajax": {
+            "url": "/api/get/apply/",
+            "type": "POST",
+        },
+        "columns": [
+            { "data": "name" },
+            { "data": "phone" },
+            { "data": "sex" },
+            { "data": "classes" },
+            { "data": function ( data, type, full, meta ) {
+		return '<a href="/'+data.portrait+'" target="_blank">头像</a>';
+		 }},
+	],
         buttons: [
             {
                 extend: 'copyHtml5',
@@ -39,6 +53,21 @@
             },
             'excelHtml5',
             'csvHtml5',
-        ]
+        ],
+    "oLanguage": {
+        "sLengthMenu": "每页显示 _MENU_ 条记录",
+        "sZeroRecords": "抱歉， 没有找到",
+        "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+        "sInfoEmpty": "没有数据",
+        "sSearch": "搜索：",
+        "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+        "oPaginate": {
+            "sFirst": "首页",
+            "sPrevious": "前一页",
+            "sNext": "后一页",
+            "sLast": "尾页"
+            },
+	    "sZeroRecords": "没有检索到数据"
+	}
     } );
 {% endblock %}

@@ -24,4 +24,8 @@ urlpatterns = [
     url(r'^tables/', views.get_tables_html),
     url(r'^login/$', views.login, name = 'login'),
     url(r'^logout/$', views.logout, name = 'logout'),
+    
+    url(r'^api/get/classes/$', views.get_classes),
+    url(r'^api/get/apply/$', views.get_apply),
+
 ]
