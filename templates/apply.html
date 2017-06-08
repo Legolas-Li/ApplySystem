@@ -37,10 +37,10 @@
     <div class="col-md-8">
         {% if project.title %}
             <!--<div class="" id=""><i class="fa fa-header fa-fw"></i> {{project.title}}</div>-->
-            <div class="" id=""><legend> {{project.title}}  </legend></div>
+            <div class="text-center" id=""><legend> {{project.title}}  </legend></div>
         {% endif %}
         {% if project.end_at %}
-            <div class="" id=""><i class="fa fa-clock-o fa-fw"></i> {% if project.start_at %}{{project.start_at}}{% else %} Today {% endif %}--{{project.end_at}}</div>
+            <div class="" id=""><i class="fa fa-clock-o fa-fw"></i> {% if project.start_at %}{{project.start_at|date:"Y-m-d H:i:s"}}{% else %} Today {% endif %}--{{project.end_at|date:"Y-m-d H:i:s"}}</div>
         {% endif %}
         {% if project.address %}
             <div class="" id=""><i class="fa fa-map-marker fa-fw"></i> {{project.address}}</div>
@@ -85,7 +85,7 @@
                 <select class="form-control" id="classes" name="classes" >
                     {% if classes %}
                         {% for i in  classes %}
-                            <option value="{{ i.id }}">{{ i.name }}--{{ i.price }}</option>
+                            <option value="{{ i.id }}">{{ i.name }}  ￥{{ i.price }}</option>
                         {% endfor %}
                     {% endif %}
                 </select>

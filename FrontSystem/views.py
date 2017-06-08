@@ -30,7 +30,7 @@ def get_apply_html(request):
     else:
         classes = models.Classes.objects.filter(enabled=True)
         try:
-            project = models.Project.objects.get(id=1)
+            project = models.Project.objects.order_by("id")[::-1][0]
         except Exception as e:
             print e
             project = None

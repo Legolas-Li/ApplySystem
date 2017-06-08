@@ -27,5 +27,6 @@ urlpatterns = [
     
     url(r'^api/get/classes/$', views.get_classes),
     url(r'^api/get/apply/$', views.get_apply),
+    url(r'^api/set/classes/$', views.set_classes),
 
 ]
