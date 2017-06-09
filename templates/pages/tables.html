@@ -17,6 +17,7 @@
                 <th>Phone</th>
                 <th>Sex</th>
                 <th>Class</th>
+                <th>Create_at</th>
                 <th>Portrait</th>
                 <!--<th>Salary</th>-->
             </tr>
@@ -36,13 +37,16 @@
             "type": "POST",
         },
         "columns": [
-            { "data": "name" },
-            { "data": "phone" },
-            { "data": "sex" },
-            { "data": "classes" },
+            { "data": "name" ,width:"10%"},
+            { "data": "phone" ,width:"10%"},
+            { "data": "sex" ,width:"5%"},
+            { "data": "classes" ,width:"10%"},
+            { "data": function ( data, type, full, meta ) {
+		return data.create_at.replace("T"," ").replace("Z","");
+		} ,width:"10%"},
             { "data": function ( data, type, full, meta ) {
 		return '<a href="/'+data.portrait+'" target="_blank">头像</a>';
-		 }},
+		} ,width:"10%"},
 	],
         buttons: [
             {

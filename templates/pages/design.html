@@ -34,6 +34,13 @@
             <label class="control-label" for="inputError">Descriptions</label>
             <textarea type="text" class="form-control" id="descriptions" name="descriptions" rows="3" disabled>{{project.description}}</textarea>
         </div>
+        <!--    <div class="form-group ">
+                <div class="input-group">
+                <label class="input-group-addon">PreImage</label>
+                    <input type="file" class="form-control" id="preImage" name="preImage" disabled>
+                </div>
+            </div>
+	-->
         <div class="form-group text-center">
         <button id="formSubmit" type="submit" class="btn " disabled>Submit</button>
         <button type="button" class="btn" onclick="editProject()" >编辑</button>
@@ -135,7 +142,8 @@ $('#projectForm').submit(function() {
 		$('#title').attr("disabled",true); 
 		$('#playRange').attr("disabled",true); 
 		//$('#end').attr("disabled",true); 
-		$('#address').attr("disabled",true); 
+		$('#address').attr("disabled",true);
+		//$('#preImage').attr("disabled",true);
 		$('#descriptions').attr("disabled",true); 
 		$('#formSubmit').attr("disabled",true); 
 	});
@@ -148,6 +156,7 @@ function editProject(){
 	$('#playRange').attr("disabled",false); 
 	//$('#end').attr("disabled",false); 
 	$('#address').attr("disabled",false); 
+	//$('#preImage').attr("disabled",false);
 	$('#descriptions').attr("disabled",false); 
 	$('#formSubmit').attr("disabled",false); 
 }

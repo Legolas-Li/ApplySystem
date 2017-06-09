@@ -86,7 +86,8 @@ def get_apply(request):
         apply_json = {}
         apply_json["name"]=i.name
         apply_json["phone"]=i.phone
-        apply_json["sex"]=i.sex
+        apply_json["sex"]=i.get_sex_display()
+        apply_json["create_at"]=i.create_at
         apply_json["classes"]=models.Classes.objects.get(id=i.classes_id).name
         apply_json["portrait"]=str(i.portrait)
         #print i.qr,type(i.qr)

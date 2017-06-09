@@ -32,7 +32,7 @@ class Classes(models.Model):
 class ApplyForm(models.Model):
     name = models.CharField(max_length=100)
     phone = models.CharField(blank=True, null=True, max_length=100)
-    sex_choices = (("boy","Boy"),("girl","Girl"))
+    sex_choices = (("boy","男"),("girl","女"))
     classes = models.ForeignKey(Classes, blank=True, null=True)
     sex = models.CharField(choices=sex_choices, max_length=16, default="boy")
     portrait = models.FileField(upload_to='statics/documents/portrait', blank=True, null=True)
