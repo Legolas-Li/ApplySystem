@@ -12,12 +12,16 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/statics/js/bootstrap.min.js"></script>
-    <title>Online报名入口</title>
-</head>
-<body>
-<div style ='margin:0 auto;width:0px;height:0px;overflow:hidden;'>
+{% if project.title %}
+    <title>{{project.title}}</title>
+{% else %}
+    <title>在线报名</title>
+{% endif %}
+<div id='wx_pic' style ='margin:0 auto;width:0px;height:0px;overflow:hidden;'>
 <img src='/statics/images/logo.jpg' />
 </div >
+</head>
+<body>
 <herader class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
@@ -128,8 +132,7 @@ $(document).ready(function() {
      });
     function showResponse(responseText, statusText, xhr, $form) {
         //console.log(xhr.responseText+"=="+$form.attr("method")+'status: ' + statusText + '\n\nresponseText: \n' + responseText);
-        console.log(data);
-        $("#output").html(data);
+        //$("#output").html(data);
         //xhr：说明你可以用ajax来自己再次发出请求
         //$form：是那个form对象，是一个jquery对象
         //statusText：状态，成功则为success

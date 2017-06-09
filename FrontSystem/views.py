@@ -26,7 +26,7 @@ def get_apply_html(request):
         except Exception as e:
             print "Create form fail: %s " % e
             return render(request, "result.html", {"msg": "报名失败, %s" % e,"status":"failed", "qr": None})
-        return render(request, "result.html",{"msg":"报名成功,请长按二维码缴费","status":"succeed", "qr":models.Classes.objects.get(id=classes_id).qr})
+        return render(request, "result.html",{"msg":"报名成功,请长按二维码缴费","status":"succeed", "qr":models.Classes.objects.get(id=classes_id).qr.file})
     else:
         classes = models.Classes.objects.filter(enabled=True)
         try:
