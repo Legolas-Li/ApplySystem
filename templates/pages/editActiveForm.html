@@ -1,0 +1,270 @@
+
+<form method="post" action="/api/edit/active/" enctype="multipart/form-data" id="addActiveForm" onsubmit="return addActiveForm();">
+    <div class="col-md-12 modal-body " id="addActiveModalBody">
+        <div class="col-md-12 form-inline"  style="margin-bottom:10px">
+            <label for="activeName">活动名称<font color="red">*</font></label>
+            <input type="text" class="form-control" id="activeName"
+                   name="activeName" placeholder="活动名称" value="{{ active_obj.name }}" style="width:60%">
+            <label style="display: none;">活动地点ID:<input type="text" class="form-control" name="active_id" id="active_id" readonly="readonly" value="{{ active_obj.id }}"></label>
+        </div>
+        <div class="col-md-12 form-inline"  style="margin-bottom:10px">
+            <label for="activeRange">报名期限<font color="red">*</font></label>
+            <input type="text" class="form-control" id="activeRange"
+                   name="activeRange" placeholder="" {% if active.start_at %} value='{{ active_obj.start_at|date:"Y-m-d H:i:s" }} - {{ active_obj.end_at|date:"Y-m-d H:i:s" }}' {% else %} value="" {% endif %} style="width:60%">
+        </div>
+        <div class="col-md-12 form-inline"  style="margin-bottom:10px">
+            <label for="activePrice">报名费用<font color="red">*</font></label>
+            <input type="text" class="form-control" id="activePrice"
+                   name="activePrice" placeholder="￥" value="{{ active_obj.price }}" style="width:60%">
+        </div>
+        <div class="col-md-12 form-inline"  style="margin-bottom:10px">
+            <label for="activeGift">赠品名称<font color="red">*</font></label>
+            <input type="text" class="form-control" id="activeGift"
+                   name="activeGift" placeholder="" value="{{ active_obj.gift }}" style="width:60%">
+        </div>
+        <div id="stationTable" class="col-md-4" style="margin-bottom:10px">
+            <label style="display: none;">URL个数:<input type="text" name="stationNum" id="stationNum" readonly="readonly" value=""></label>
+            <div id="stationWrapper">
+                <a href="#" id="stationAddMoreBox" class="btn btn-info">增加站点</a>
+                <!--<script>var stationNum = new Array(); </script>-->
+                {% for i in active_obj.station.all %}
+                    <!--<script>-->
+                        <!--stationNum.push({{ forloop.counter }});-->
+                        <!--$("#stationNum").val(stationNum);-->
+                    <!--</script>-->
+                    <div id="{{ forloop.counter }}" >
+                        <input type="text" class="form-control" name="station[{{ forloop.counter }}]" id="station_{{ forloop.counter }}" value="{{ i }}" placeholder="站点名称" style="margin-bottom:1px"  readonly>
+                        <!--<a href="#" class="removeClass"> × </a>-->
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="volunteerTable" class="col-md-4" style="margin-bottom:10px">
+            <label style="display: none;">volunteer个数:<input type="text" name="volunteerNum" id="volunteerNum" readonly="readonly" value=""></label>
+            <div id="volunteerWrapper">
+                <a href="#" id="volunteerAddMoreBox" class="btn btn-info">增加志愿者</a>
+                <!--<script>var volunteerNum = new Array(); </script>-->
+                {% for i in active_obj.volunteer.all %}
+                    <!--<script>-->
+                        <!--volunteerNum.push({{ forloop.counter }});-->
+                        <!--$("#volunteerNum").val(volunteerNum);-->
+                    <!--</script>-->
+                    <div id="{{ forloop.counter }}" >
+                        <input type="text" class="form-control" name="volunteer[{{ forloop.counter }}]" id="volunteer_{{ forloop.counter }}" value="{{ i }}" placeholder="志愿者名称" style="margin-bottom:1px" readonly>
+                        <!--<a href="#" class="removeClass"> × </a>-->
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="groupTable" class="col-md-4" style="margin-bottom:10px">
+            <label style="display: none;">Group个数:<input type="text"  name="groupNum" id="groupNum" readonly="readonly" value=""></label>
+            <div id="groupWrapper">
+                <a href="#" id="groupAddMoreBox" class="btn btn-info">增加团体</a>
+                <!--<script>var groupNum = new Array(); </script>-->
+                {% for i in active_obj.group.all %}
+                    <!--<script>-->
+                        <!--groupNum.push({{ forloop.counter }});-->
+                        <!--$("#groupNum").val(groupNum);-->
+                    <!--</script>-->
+                    <div id="{{ forloop.counter }}" >
+                        <input type="text" class="form-control" name="group[{{ forloop.counter }}]" id="group_{{ forloop.counter }}" value="{{ i }}" placeholder="团体名称"  style="margin-bottom:1px" readonly>
+                        <!--<a href="#" class="removeClass"> × </a>-->
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer" >
+        <button type="submit" class="btn btn-primary">修改</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</form>
+
+<script type="text/javascript">
+
+    $('#activeRange').daterangepicker({
+        "timePicker": true,
+        "timePickerSeconds": true,
+        "timePicker24Hour": true,
+        "autoApply": true,
+        "dateLimit": {
+            "days": 365
+        },
+        //"startDate": new Date().toLocaleString(),
+        //"endDate": new Date().toLocaleString(),
+        "alwaysShowCalendars": true,
+        locale: {
+          format: 'YYYY-MM-DD HH:mm:ss',
+            "applyLabel": "确定",
+            "cancelLabel": "取消",
+            "fromLabel": "From",
+            "toLabel": "To",
+        },
+        "ranges": {
+            "Today": [
+                new Date().toLocaleString(),new Date().toLocaleString()
+            ],
+            "1 Days": [
+                new Date(),
+                new Date().setDate(new Date().getDate()+1)
+            ],
+            "10 Days": [
+                new Date(),
+                new Date().setDate(new Date().getDate()+10)
+            ],
+            "20 Days": [
+                new Date(),
+                new Date().setDate(new Date().getDate()+20)
+            ],
+            "30 Days": [
+                new Date(),
+                new Date().setDate(new Date().getDate()+30)
+            ]
+        },
+    }, function(start, end, label) {
+      console.log("New date range selected: ' + start.format('YYYY-MM-DD HH:mm:ss') + ' to ' + end.format('YYYY-MM-DD HH:mm:ss') + ' (predefined range: ' + label + ')");
+    });
+
+    var stationMaxInputs       = 50; //maximum input boxes allowed
+    var stationInputsWrapper   = $("#stationWrapper"); //Input boxes wrapper ID
+    var stationAddButton       = $("#stationAddMoreBox"); //Add button ID
+    var stationArray           = new Array();
+    var stationX = stationInputsWrapper.children("div").length; //initlal text box count
+    var stationFieldCount=0; //to keep track of text box added
+    var flag = 0;//show typeahead status
+
+    $(stationAddButton).click(function (e)  //on add input button click
+    {
+        if(stationX <= stationMaxInputs) //max input box allowed
+        {
+            stationFieldCount++; //text box added increment
+            stationArray.push(stationFieldCount)
+            //add input box
+            $(stationInputsWrapper).append('<div class="col-md-12 form-inline" id="'+ stationFieldCount +'">'+
+                                        '<input type="text" class="form-control" name="station['+ stationFieldCount +']" id="station_'+ stationFieldCount +'" value="" placeholder="站点名称" style="margin-bottom:1px"/> '+
+                                        '<a href="#" class="removeClass"> × </a>'+
+                                        '</div>');
+        }
+        stationX++; //text box increment
+        $("#stationNum").val(stationArray);
+        console.log($("#stationNum").val());
+        return false;
+    });
+
+    $("#stationTable").on("click",".removeClass", function(e){ //user click on remove text
+        if( stationX >= 1 ) {
+                //console.log($(this).parent('div').attr("id"))
+                var stationPop = $(this).parent('div').attr("id")
+                $(this).parent('div').remove(); //remove text box
+                stationX--; //decrement textbox
+                stationArray.remove(stationPop)
+                $("#stationNum").val(stationArray)
+        }
+        return false;
+    })
+
+    var volunteerMaxInputs       = 50; //maximum input boxes allowed
+    var volunteerInputsWrapper   = $("#volunteerWrapper"); //Input boxes wrapper ID
+    var volunteerAddButton       = $("#volunteerAddMoreBox"); //Add button ID
+    var volunteerArray           = new Array();
+    var volunteerX = volunteerInputsWrapper.children("div").length; //initlal text box count
+    var volunteerFieldCount=0; //to keep track of text box added
+    var flag = 0;//show typeahead status
+
+    $(volunteerAddButton).click(function (e)  //on add input button click
+    {
+        if(volunteerX <= volunteerMaxInputs) //max input box allowed
+        {
+            volunteerFieldCount++; //text box added increment
+            volunteerArray.push(volunteerFieldCount)
+            //add input box
+            $(volunteerInputsWrapper).append('<div class="col-md-12 form-inline" id="'+ volunteerFieldCount +'">'+
+                                        '<input type="text" class="form-control" name="volunteer['+ volunteerFieldCount +']" id="volunteer_'+ volunteerFieldCount +'" value="" placeholder="志愿者名称" style="margin-bottom:1px"/> '+
+                                        '<a href="#" class="removeClass"> × </a>'+
+                                        '</div>');
+        }
+        volunteerX++; //text box increment
+        $("#volunteerNum").val(volunteerArray);
+        return false;
+    });
+
+    $("#volunteerTable").on("click",".removeClass", function(e){ //user click on remove text
+        if( volunteerX >= 1 ) {
+                //console.log($(this).parent('div').attr("id"))
+                var volunteerPop = $(this).parent('div').attr("id")
+                $(this).parent('div').remove(); //remove text box
+                volunteerX--; //decrement textbox
+                volunteerArray.remove(volunteerPop)
+                $("#volunteerNum").val(volunteerArray)
+        }
+        return false;
+    })
+
+    var groupMaxInputs       = 50; //maximum input boxes allowed
+    var groupInputsWrapper   = $("#groupWrapper"); //Input boxes wrapper ID
+    var groupAddButton       = $("#groupAddMoreBox"); //Add button ID
+    var groupArray           = new Array();
+    var groupX = groupInputsWrapper.children("div").length; //initlal text box count
+    var groupFieldCount=0; //to keep track of text box added
+    var flag = 0;//show typeahead status
+
+    $(groupAddButton).click(function (e)  //on add input button click
+    {
+        if(groupX <= groupMaxInputs) //max input box allowed
+        {
+            groupFieldCount++; //text box added increment
+            groupArray.push(groupFieldCount)
+            //add input box
+            $(groupInputsWrapper).append('<div class="col-md-12 form-inline" id="'+ groupFieldCount +'">'+
+                                        '<input type="text" class="form-control" name="group['+ groupFieldCount +']" id="group_'+ groupFieldCount +'" value="" placeholder="团体名称" style="margin-bottom:1px"/> '+
+                                        '<a href="#" class="removeClass"> × </a>'+
+                                        '</div>');
+        }
+        groupX++; //text box increment
+        $("#groupNum").val(groupArray);
+        return false;
+    });
+
+    $("#groupTable").on("click",".removeClass", function(e){ //user click on remove text
+        if( groupX >= 1 ) {
+                //console.log($(this).parent('div').attr("id"))
+                var groupPop = $(this).parent('div').attr("id")
+                $(this).parent('div').remove(); //remove text box
+                groupX--; //decrement textbox
+                groupArray.remove(groupPop)
+                $("#groupNum").val(groupArray)
+        }
+        return false;
+    })
+
+    function addActiveForm(){
+        // jquery 表单提交
+        $("#addActiveForm").ajaxSubmit(function(message) {
+        if ($("#activeName").val() == '') {
+            $("#activeName").focus();
+            return false;
+        }
+        if ($("#activeRange").val() == '') {
+            $("#activeRange").focus();
+            return false;
+        }
+        if ($("#activePrice").val() == '') {
+            $("#activePrice").focus();
+            return false;
+        }
+        if ($("#activeGift").val() == '') {
+            $("#activeGift").focus();
+            return false;
+        }
+        // 对于表单提交成功后处理，message为提交的返回内容
+            <!--$('#createInterfaceModalBody').html(message);-->
+            $('#modal-body').html(message);
+            $('#addActiveModal').modal('hide');
+            $('#myModal').modal('show');
+            getActiveTable();
+        });
+        return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
+    }
+
+</script>
