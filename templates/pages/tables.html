@@ -31,22 +31,21 @@
 {% block js %}
     $('#example').DataTable( {
         dom: 'Bfrtip',
-	aLengthMenu: [[10, 50, 100, -1], [10, 50, 100, "All"]],
+	aLengthMenu: [[20, 50, 100, -1], [20, 50, 100, "All"]],
+	order: [[4, 'desc']],
         "ajax": {
             "url": "/api/get/apply/",
             "type": "POST",
         },
         "columns": [
-            { "data": "name" ,width:"10%"},
-            { "data": "phone" ,width:"10%"},
-            { "data": "sex" ,width:"5%"},
-            { "data": "classes" ,width:"10%"},
-            { "data": function ( data, type, full, meta ) {
-		return data.create_at.replace("T"," ").replace("Z","");
-		} ,width:"10%"},
+            { "data": "name" },
+            { "data": "phone" },
+            { "data": "sex" },
+            { "data": "classes" },
+            { "data": "create_at" },
             { "data": function ( data, type, full, meta ) {
 		return '<a href="/'+data.portrait+'" target="_blank">头像</a>';
-		} ,width:"10%"},
+		 }},
 	],
         buttons: [
             {

@@ -17,5 +17,7 @@ from django.conf.urls import url
 # from django.contrib import admin
 from . import views
 urlpatterns = [
+    url(r'^$', views.get_apply_html),
     url(r'^apply/', views.get_apply_html),
+    url(r'^wx/', views.get_wx_accept),
 ]

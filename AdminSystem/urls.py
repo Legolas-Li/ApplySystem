@@ -18,12 +18,13 @@ from . import views
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='index'),
+    #url(r'^$', views.index, name='index'),
     url(r'^index/', views.get_index_html),
     url(r'^design/', views.get_front_design_html),
     url(r'^tables/', views.get_tables_html),
     url(r'^login/$', views.login, name = 'login'),
     url(r'^logout/$', views.logout, name = 'logout'),
+
     
     url(r'^api/get/classes/$', views.get_classes),
     url(r'^api/get/apply/$', views.get_apply),

@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Bootstrap -->
-	<link href="/statics/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/statics/css/bootstrap.min.css" rel="stylesheet">
     <link href="/statics/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="/statics/js/jquery.form.js"></script>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -17,21 +17,15 @@
 {% else %}
     <title>在线报名</title>
 {% endif %}
-<div id='wx_pic' style ='margin:0 auto;width:0px;height:0px;overflow:hidden;'>
+<!--<div id='wx_pic' style ='margin:0 auto;width:0px;height:0px;overflow:hidden;'>
 <img src='http://www.lookingedu.com:7777/xiaole.jpg' />
-</div >
+</div >-->
 </head>
 <body>
 <herader class="container-fluid">
 	<div class="row-fluid">
-		<div class="span12">
-			<!--<h2>-->
-				<!--标题-->
-			<!--</h2>-->
-			<div class="">
-				<img src="/statics/images/title.jpg" class="img-responsive"/>
-			</div>
-
+		<div class="">
+			<img src="/statics/images/preImage.jpg" class="img-responsive"/>
 		</div>
 	</div>
 </herader>
@@ -95,17 +89,17 @@
                 </select>
                     </div>
             </div>
-            <div class="form-group ">
+            <!--<div class="form-group ">
                 <div class="input-group">
                 <label class="input-group-addon">头像</label>
                     <input type="file" class="form-control" id="portrait" name="portrait"/>
                 </div>
-            </div>
+            </div>-->
             <!--<div class="form-control">-->
             <!--<input type="checkbox" /> 勾选同意</label>-->
             <!--</div>-->
             <div class="text-center">
-                <button type="submit" class="btn">报名</button>
+                <button id="formSubmit" type="submit" class="btn">报名</button>
             </div>
         </form>
     </div>
@@ -126,7 +120,16 @@ $(document).ready(function() {
      };
 
     $('#applyForm').submit(function() {
+        if ($("#name").val()==''){
+		$("#name").focus();
+		return false;
+	}
+        if ($("#phone").val()==''){
+		$("#phone").focus();
+		return false;
+	}
         $(this).ajaxSubmit(options);
+        $('#formSubmit').attr("disabled",true);
         return false;
         //非常重要，如果是false，则表明是不跳转
      });
